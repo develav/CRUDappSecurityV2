@@ -17,62 +17,94 @@ public class UserDaoImpl implements UserDao {
     private EntityManagerFactory entityManagerFactory;
     @Override
     public void add(User user) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-        em.createNativeQuery("INSERT INTO users (name, surname) VALUES(?, ?)")
-          .setParameter(1, user.getName())
-          .setParameter(2, user.getSurname())
-          .executeUpdate();
-        em.getTransaction().commit();
-        em.close();
+        EntityManager em = null;
+        try{
+            em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+            em.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public List<User> listUsers() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        Query query = em.createQuery("SELECT e FROM User e");
-        return (List<User>) query.getResultList();
+        EntityManager em = null;
+        List<User> userList = null;
+        try{
+            em = entityManagerFactory.createEntityManager();
+            Query query = em.createQuery("SELECT e FROM User e");
+            userList = (List<User>) query.getResultList();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return userList;
     }
 
     @Override
     public User getUserById(long id) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        Query query = em.createQuery("SELECT e FROM User e WHERE e.id = :id");
-        query.setParameter("id", id);
-        return (User)query.getSingleResult();
+        EntityManager em = null;
+        User user = null;
+        try{
+            em = entityManagerFactory.createEntityManager();
+            Query query = em.createQuery("SELECT e FROM User e WHERE e.id = :id");
+            query.setParameter("id", id);
+            user = (User)query.getSingleResult();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
     public void update(long id, User user) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-        Query query = em.createQuery("UPDATE User e SET e.name = :newName, e.surname = :newSurname WHERE e.id = :id");
-        query.setParameter("newName", user.getName());
-        query.setParameter("newSurname", user.getSurname());
-        query.setParameter("id", user.getId());
-        query.executeUpdate();
-        em.getTransaction().commit();
-        em.close();
+        EntityManager em = null;
+        try{
+            em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
+            Query query = em.createQuery("UPDATE User e SET e.name = :newName, e.surname = :newSurname WHERE e.id = :id");
+            query.setParameter("newName", user.getName());
+            query.setParameter("newSurname", user.getSurname());
+            query.setParameter("id", user.getId());
+            query.executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(long id) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-        Query query = em.createQuery("DELETE FROM User WHERE id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
-        em.getTransaction().commit();
-        em.close();
+        EntityManager em = null;
+        try{
+            em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
+            Query query = em.createQuery("DELETE FROM User WHERE id = :id");
+            query.setParameter("id", id);
+            query.executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deleteAll() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-        Query query = em.createQuery("DELETE FROM User");
-        query.executeUpdate();
-        em.getTransaction().commit();
-        em.close();
+        EntityManager em = null;
+        try{
+            em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
+            Query query = em.createQuery("DELETE FROM User");
+            query.executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
