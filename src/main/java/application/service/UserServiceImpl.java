@@ -2,7 +2,6 @@ package application.service;
 
 import application.dao.UserDao;
 import application.model.User;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +29,12 @@ public class UserServiceImpl implements UserService{
     public User getUserById(long id) {
         return userDao.getUserById(id);
     }
+
+    @Override
+    public User getUserByName(String name) {
+        return userDao.getUserByName(name);
+    }
+
 
     @Override
     public void update(long id, User user) {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang=en xmlns:sec="http://www.springframework.org/security/tags" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> form </title>
+</head>
+<body>
+<div>
+    <form name="f" th:action="@{/login}" method="post">
+        <fieldset>
+
+            <legend>Enter</legend>
+
+            <div th:if="${param.error}" class="alert alert-error">
+                Wrong name and password.
+            </div>
+
+            <div th:if="${param.logout}" class="alert alert-success">
+                You have been logged out.
+            </div>
+
+            <label for="j_username">Name</label>
+            <input type="text" id="j_username" name="j_username"/>
+
+            <label for="j_password">Password</label>
+            <input type="password" id="j_password" name="j_password"/>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Enter</button>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

@@ -5,14 +5,21 @@
     <title>new user</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/}" th:object="${user}">
-  <label for="name">Enter name</label>
-  <input type="text" th:field="*{name}" id="name">
-  <br/>
-  <label for="surname">Enter surname</label>
-  <input type="text" th:field="*{surname}" id="surname">
-  <br/>
-  <input type="submit" value="Create!"/>
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
+    <label for="name">Enter name</label>
+    <input type="text" th:field="*{name}" id="name">
+    <br/>
+    <label for="surname">Enter surname</label>
+    <input type="text" th:field="*{surname}" id="surname">
+    <br/>
+    <label for="password">Enter password</label>
+    <input type="text" th:field="*{password}" id="password">
+    <br/>
+    <input type=checkbox id=admin name=roles value="ROLE_ADMIN">
+    <label for="admin">Admin</label>
+    <input type=checkbox id=user name=roles value="ROLE_USER">
+    <label for="user">User</label>
+    <input type="submit" value="Create!"/>
 </form>
 </body>
 </html>

@@ -6,7 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CRUDapp" />
+        <module name="security(2.4.2)" />
+        <module name="security" />
       </profile>
     </annotationProcessing>
   </component>

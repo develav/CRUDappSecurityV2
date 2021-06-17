@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<h3 th:text="'Hello, ' + ${user.getName()} + ' ' + ${user.getSurname()} + ', it is your home page!'"></h3>
+<table border="1" cellspacing="0" cellpadding="10">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Role</th>
+        <th>Password</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td th:text="${user.getName()}"></td>
+    <td th:text="${user.getSurname()}"></td>
+    <td th:text="${user.getRoles()}"></td>
+    <td th:text="${user.getPassword()}"></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Would you like to <a href="/logout">log out</a>?</h3>
+</body>
+</html>

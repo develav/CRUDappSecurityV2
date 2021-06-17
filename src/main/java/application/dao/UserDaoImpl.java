@@ -60,13 +60,27 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User getUserByName(String name) {
+        EntityManager em = null;
+        User user = null;
+        try{
+            em = entityManagerFactory.createEntityManager();
+            Query query = em.createQuery("SELECT e FROM User e WHERE e.name ='" + name + "'");
+            user = (User)query.getSingleResult();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
     public void update(long id, User user) {
         EntityManager em = null;
         try{
             em = entityManagerFactory.createEntityManager();
             em.getTransaction().begin();
             Query query = em.createQuery("UPDATE User e SET e.name = :newName, e.surname = :newSurname WHERE e.id = :id");
-            query.setParameter("newName", user.getName());
+            query.setParameter("newName", user.getUsername());
             query.setParameter("newSurname", user.getSurname());
             query.setParameter("id", user.getId());
             query.executeUpdate();
